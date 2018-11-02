@@ -1,40 +1,38 @@
-import Foundation
-
 extension CGPoint{
     func translate(x: CGFloat, _ y: CGFloat) -> CGPoint {
-        return CGPointMake(self.x + x, self.y + y)
+        return CGPoint(x: self.x + x, y: self.y + y)
     }
     
     func translateX(x: CGFloat) -> CGPoint {
-        return CGPointMake(self.x + x, self.y)
+        return CGPoint(x: self.x + x, y: self.y)
     }
     
     func translateY(y: CGFloat) -> CGPoint {
-        return CGPointMake(self.x, self.y + y)
+        return CGPoint(x: self.x, y: self.y + y)
     }
     
     func invertY() -> CGPoint {
-        return CGPointMake(self.x, -self.y)
+        return CGPoint(x: self.x, y: -self.y)
     }
     
     func xAxis() -> CGPoint {
-        return CGPointMake(0, self.y)
+        return CGPoint(x: 0, y: self.y)
     }
     
     func yAxis() -> CGPoint {
-        return CGPointMake(self.x, 0)
+        return CGPoint(x: self.x, y: 0)
     }
     
     func addTo(a: CGPoint) -> CGPoint {
-        return CGPointMake(self.x + a.x, self.y + a.y)
+        return CGPoint(x: self.x + a.x, y: self.y + a.y)
     }
     
     func deltaTo(a: CGPoint) -> CGPoint {
-        return CGPointMake(self.x - a.x, self.y - a.y)
+        return CGPoint(x: self.x - a.x, y: self.y - a.y)
     }
     
     func multiplyBy(value:CGFloat) -> CGPoint{
-        return CGPointMake(self.x * value, self.y * value)
+        return CGPoint(x: self.x * value, y: self.y * value)
     }
     
     func length() -> CGFloat {
@@ -45,17 +43,17 @@ extension CGPoint{
     
     func normalize() -> CGPoint {
         let l = self.length()
-        return CGPointMake(self.x / l, self.y / l)
+        return CGPoint(x: self.x / l, y: self.y / l)
     }
     
-    static func fromString(string: String) -> CGPoint {
-        var s = string.stringByReplacingOccurrencesOfString("{", withString: "")
-        s = s.stringByReplacingOccurrencesOfString("}", withString: "")
-        s = s.stringByReplacingOccurrencesOfString(" ", withString: "")
+    public static func fromString(string: String) -> CGPoint {
+        var s = string.replacingOccurrences(of: "{", with: "")
+        s = s.replacingOccurrences(of: "}", with: "")
+        s = s.replacingOccurrences(of: " ", with: "")
         
-        let x = NSString(string: s.componentsSeparatedByString(",").first! as String).doubleValue
-        let y = NSString(string: s.componentsSeparatedByString(",").last! as String).doubleValue
+        let x = NSString(string: s.components(separatedBy: ",").first! as String).doubleValue
+        let y = NSString(string: s.components(separatedBy: ",").last! as String).doubleValue
         
-        return CGPointMake(CGFloat(x), CGFloat(y))
+        return CGPoint(x: CGFloat(x), y: CGFloat(y))
     }
 }
